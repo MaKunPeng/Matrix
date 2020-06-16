@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.dust</groupId>
-    <artifactId>ms</artifactId>
+    <artifactId>dms</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>ms</name>
+    <name>dms</name>
     <description>AI Manager System</description>
 
     <properties>
@@ -26,6 +26,14 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
         </dependency>
 
         <dependency>
@@ -50,9 +58,9 @@
             </exclusions>
         </dependency>
         <dependency >
-            <groupId >javax.mail </groupId >
-            <artifactId >mail </artifactId >
-            <version >1.4.7 </version >
+            <groupId >javax.mail</groupId >
+            <artifactId >mail</artifactId >
+            <version >1.4.7</version >
         </dependency >
     </dependencies>
 
