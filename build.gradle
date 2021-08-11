@@ -51,8 +51,8 @@ subprojects {
 
     // 子工程统一依赖Jar包
     dependencies {
-        compileOnly libraires.lombok
-        annotationProcessor libraires.lombok
+        compileOnly libraries.lombok
+        annotationProcessor libraries.lombok
     }
 
     // Spring 相关依赖

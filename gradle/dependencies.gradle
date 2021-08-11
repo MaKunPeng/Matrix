@@ -9,17 +9,19 @@ ext {
             mysqlConnect      : '8.0.18',
             mybatisPlus       : '3.4.3',
             shardingSphere    : '4.1.1',
-            guava             : '30.1.1-jre'
+            guava             : '30.1.1-jre',
+            jpa               : '2.3.11.RELEASE'
     ]
     // 依赖库集合
-    libraires = [
+    libraries = [
             lombok           : "org.projectlombok:lombok:${versions.lombok}",
             junit            : "junit:junit:${versions.junit}",
             mysqlConnect     : "mysql:mysql-connector-java:${versions.mysqlConnect}",
             mybatisPlus      : "com.baomidou:mybatis-plus-boot-starter:${versions.mybatisPlus}",
             dynamicDatasource: "com.baomidou:dynamic-datasource-spring-boot-starter:${versions.dynamicDatasource}",
             shardingSphere   : "org.apache.shardingsphere:sharding-jdbc-spring-boot-starter:${versions.shardingSphere}",
-            guava            : "com.google.guava:guava:${versions.guava}"
+            guava            : "com.google.guava:guava:${versions.guava}",
+            jpa              : "org.springframework.boot:spring-boot-starter-data-jpa:${versions.jpa}"
     ]
 
     // 插件版本

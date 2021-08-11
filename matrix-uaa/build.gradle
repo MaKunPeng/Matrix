@@ -19,11 +19,11 @@ dependencies {
     // sentinel
     implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel'
     // db
-    implementation libraires.mysqlConnect
-    implementation libraires.mybatisPlus
-    implementation libraires.shardingSphere
+    implementation libraries.mysqlConnect
+    implementation libraries.mybatisPlus
+    implementation libraries.shardingSphere
     // test
-    testImplementation libraires.junit
+    testImplementation libraries.junit
     // JUnit5需要排除junit-vintage
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
