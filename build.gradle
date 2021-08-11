@@ -1,0 +1,72 @@
+buildscript {
+    apply from: "${rootDir}/gradle/dependencies.gradle"
+
+    repositories {
+        maven {
+            url 'https://maven.aliyun.com/repository/gradle-plugin'
+        }
+        gradlePluginPortal()
+        maven{
+            url = 'https://maven.aliyun.com/nexus/content/repositories/central/'
+        }
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${pluginVersions.springBoot}"
+        classpath "io.spring.gradle:dependency-management-plugin:${pluginVersions.springDependencies}"
+    }
+}
+
+// 配置spring插件
+// apply plugin: 'org.springframework.boot' Srping Boot 插件子工程自己指定
+apply plugin: 'io.spring.dependency-management'
+
+// 版本
+version '1.0-SNAPSHOT'
+// 工程通用配置
+allprojects {
+    group 'com.aaron.matrix'
+    repositories {
+        maven{
+            url = 'https://maven.aliyun.com/nexus/content/repositories/central/'
+        }
+        mavenCentral()
+    }
+}
+
+// 子工程配置
+subprojects {
+    apply plugin: 'java-library'
+    apply plugin: 'idea'
+    apply plugin: 'io.spring.dependency-management'
+
+    apply from: "${rootDir}/gradle/dependencies.gradle"
+
+    // use java11
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+
+    // UTF-8
+    [compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
+
+    // 子工程统一依赖Jar包
+    dependencies {
+        compileOnly libraires.lombok
+        annotationProcessor libraires.lombok
+    }
+
+    // Spring 相关依赖
+    // Spring Cloud Alibaba 版本依赖关系:
+    // https://github.com/alibaba/spring-cloud-alibaba/wiki/%E7%89%88%E6%9C%AC%E8%AF%B4%E6%98%8E
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${versions.springCloud}"
+            mavenBom "com.alibaba.cloud:spring-cloud-alibaba-dependencies:${versions.springCloudAlibaba}"
+        }
+    }
+
+    test {
+        useJUnitPlatform()
+        ignoreFailures = true
+    }
+}

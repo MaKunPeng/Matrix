@@ -1,0 +1,15 @@
+bin
+build
+build-cache
+test-output
+jitwatch.out
+.DS_Store
+.classpath
+.settings
+.project
+.gradle
+.idea
+*.iml
+target
+simulator/src/main/resources/application.conf
+
