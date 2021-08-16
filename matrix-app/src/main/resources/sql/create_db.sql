@@ -5,7 +5,7 @@ CREATE TABLE `user_base_info`
     `uid`           int(11) unsigned NOT NULL DEFAULT '0' COMMENT '用户ID',
     `name`          varchar(36) NOT NULL DEFAULT '' COMMENT '用户呢称',
     `sex`           tinyint(4) NOT NULL DEFAULT '0' COMMENT '性别 0:保密 1:男 2:女',
-    `account_state` tinyint(4) NOT NULL DEFAULT '' COMMENT '账户状态',
+    `account_state` tinyint(4) NOT NULL DEFAULT '0' COMMENT '账号状态，0：正常，1：封禁',
     `ctime`         timestamp   NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `mtime`         timestamp   NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '最后修改时间',
     PRIMARY KEY (`id`),
