@@ -1,23 +1,27 @@
 package com.makunpeng.matrix.app.domain.model.post;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.makunpeng.matrix.common.ddd.AggregateRoot;
+import com.makunpeng.matrix.common.ddd.Entity;
+import lombok.*;
 
 /**
+ * Post 领域聚合根
  * @author MaKunPeng
- * @version 1.0
+ * @since 1.0
  * @date 2021/8/16
- * @since
  **/
-@Entity
-@Table
-public class Post {
-    @Id
-    private Long id;
-    private Long postID;
-    private Long authorID;
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+public class Post implements AggregateRoot<PostId> {
+    private PostId postId;
+    private Long uid;
     private String title;
     private String summary;
+    private String content;
+    private Integer commentCounts;
+    private Integer likesCounts;
 
 }

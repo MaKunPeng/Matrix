@@ -1,10 +1,9 @@
 package com.makunpeng.matrix.app.domain.service;
 
 /**
+ * Post领域服务
  * @author MaKunPeng
  * @version 1.0
- * @date 2021/8/17
- * @since
  **/
-public class PostService {
+public interface PostDomainService {
 }
