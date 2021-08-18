@@ -1,6 +1,5 @@
-package com.makunpeng.matrix.app.persistence.post;
+package com.makunpeng.matrix.app.infra.persistence.sql.post;
 
-import com.makunpeng.matrix.app.domain.model.post.Post;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -10,6 +9,6 @@ import java.util.List;
  * @author MaKunPeng
  */
 public interface PostInfoDAO extends JpaRepository<PostInfoDO, Long> {
-    List<PostInfoDO> findByUid();
-    List<Post> findByPid();
+    List<PostInfoDO> findByUid(Long uid);
+    PostInfoDO findByPid(Long pid);
 }

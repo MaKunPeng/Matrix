@@ -1,4 +1,4 @@
-package com.makunpeng.matrix.app.persistence.post;
+package com.makunpeng.matrix.app.infra.persistence.sql.post;
 
 import com.makunpeng.matrix.common.ddd.Cache;
 import org.springframework.stereotype.Component;

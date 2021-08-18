@@ -1,4 +1,4 @@
-package com.makunpeng.matrix.app.persistence.post;
+package com.makunpeng.matrix.app.infra.persistence.sql.post;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,21 +10,21 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.sql.Timestamp;
 
+/**
+ * @author MaKunPeng
+ * @date 2021-8-17 10:21:05
+ */
 @Entity
-@Table(name = "post_info")
+@Table(name = "post_body")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class PostInfoDO {
+public class PostBodyDO {
     @Id
     private Long id;
     private Long pid;
-    private Long uid;
-    private String title;
-    private String summary;
-    private Integer commentCounts;
-    private Integer likesCounts;
+    private String content;
     private Timestamp ctime;
     private Timestamp mtime;
 }

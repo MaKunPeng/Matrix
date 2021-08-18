@@ -8,6 +8,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-aop'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'javax.servlet:javax.servlet-api'
     // security
 //    implementation 'org.springframework.boot:spring-boot-starter-security'
@@ -21,7 +22,6 @@ dependencies {
     // db
     implementation libraries.mysqlConnect
     implementation libraries.shardingSphere
-    implementation libraries.jpa
     // test
     testImplementation libraries.junit
     // JUnit5需要排除junit-vintage

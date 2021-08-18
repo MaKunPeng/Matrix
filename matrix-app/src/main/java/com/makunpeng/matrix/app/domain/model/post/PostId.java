@@ -9,5 +9,5 @@ import lombok.Getter;
 @EqualsAndHashCode
 @Getter
 public final class PostId implements ValueObject<PostId> {
-    private Long pid;
+    private Long id;
 }

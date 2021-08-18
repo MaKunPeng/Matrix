@@ -6,4 +6,5 @@ package com.makunpeng.matrix.app.domain.service;
  * @version 1.0
  **/
 public interface PostDomainService {
+
 }

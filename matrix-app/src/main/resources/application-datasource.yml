@@ -8,20 +8,21 @@ spring:
         driver-class-name: com.mysql.cj.jdbc.Driver
         jdbc-url: jdbc:mysql://120.27.92.115:3306/grana?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
         username: root
-        password: MySQL@2345wert
-    #      多数据源配置读写分离
-    #      names: master, slave
-    #      master:
-    #        type: com.zaxxer.hikari.HikariDataSource
-    #        driverClassName: com.mysql.cj.jdbc.Driver
-    #        url: jdbc:mysql://120.27.92.115:3306/grana?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
-    #        username: root
-    #        password: MySQL@2345wert
-    #      slave:
-    #        ....
-    #    masterslave:
-    #      master-data-source-name: master
-    #      slave-data-source-names: slave
+        password: MySQL@2345wert]
+
+    sharding:
+      tables:
+        post_info:
+          key-generator:
+            column: id
+            type: SNOWFLAKE
+
+      default-key-generator:
+        type: SNOWFLAKE
+        props:
+          worker.id: 1
+          max.tolerate.time.difference.milliseconds: 1000
+
     props:
       sql:
         show: true

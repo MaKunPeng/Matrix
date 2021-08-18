@@ -1,4 +1,4 @@
-package com.makunpeng.matrix.app.persistence.post;
+package com.makunpeng.matrix.app.infra.persistence.sql.post;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -7,4 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author MaKunPeng
  */
 public interface PostBodyDAO extends JpaRepository<PostBodyDO, Long> {
+    PostBodyDO findByPid(Long pid);
 }

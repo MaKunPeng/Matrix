@@ -5,5 +5,5 @@ package com.makunpeng.matrix.common.ddd;
  * @author MaKunPeng
  * @since 1.0
  */
-public interface AggregateRoot<ID> {
+public interface AggregateRoot<T> extends Entity<T> {
 }

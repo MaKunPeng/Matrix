@@ -1,17 +1,14 @@
-package com.makunpeng.matrix.app.persistence.post.impl;
+package com.makunpeng.matrix.app.infra.persistence.sql.post.impl;
 
 import com.makunpeng.matrix.app.domain.model.post.Post;
 import com.makunpeng.matrix.app.domain.repository.PostRepository;
-import com.makunpeng.matrix.app.persistence.post.PostBodyDAO;
-import com.makunpeng.matrix.app.persistence.post.PostInfoDAO;
-import com.makunpeng.matrix.app.persistence.post.PostInfoDO;
+import com.makunpeng.matrix.app.infra.persistence.sql.post.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 /**
  * Post 领域数据服务实现
+ *
  * @author MaKunPeng
  * @date 2021-8-17
  */
@@ -19,6 +16,7 @@ import java.util.List;
 public class PostRepositoryImpl implements PostRepository {
     private PostInfoDAO postInfoDAO;
     private PostBodyDAO postBodyDAO;
+    private PostDataConverter converter = PostDataConverter.INSTATNCE;
 
     @Autowired
     public PostRepositoryImpl(PostInfoDAO postInfoDAO, PostBodyDAO postBodyDAO) {
@@ -27,13 +25,23 @@ public class PostRepositoryImpl implements PostRepository {
     }
 
     /**
-     * 查询文章
+     * 根据文章id查询文章
+     *
      * @param pid
      * @return
      */
     @Override
     public Post findPost(Long pid) {
-        List<PostInfoDO> postInfoDOs = this.postInfoDAO.findByUid();
+        PostInfoDO postInfoDO = this.postInfoDAO.findByPid(pid);
+        if (postInfoDO == null) {
+            return null;
+        }
+        PostBodyDO postBodyDO = this.postBodyDAO.findByPid(pid);
+
+        return converter.toPost(postInfoDO, postBodyDO);
+    }
+
+    public Post savePost(Post post) {
 
         return null;
     }
