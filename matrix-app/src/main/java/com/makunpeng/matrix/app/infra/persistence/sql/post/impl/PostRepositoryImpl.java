@@ -6,6 +6,8 @@ import com.makunpeng.matrix.app.infra.persistence.sql.post.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * Post 领域数据服务实现
  *

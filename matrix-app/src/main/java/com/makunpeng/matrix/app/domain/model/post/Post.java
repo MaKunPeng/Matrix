@@ -16,10 +16,7 @@ import lombok.*;
 @AllArgsConstructor
 public class Post implements AggregateRoot<Post> {
     private PostId postId;
-    private Long pid;
-    private Long uid;
-    private String title;
-    private String summary;
+    private PostDesc desc;
     private PostBody body;
     private Integer commentCounts;
     private Integer likesCounts;
