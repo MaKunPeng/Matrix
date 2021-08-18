@@ -7,7 +7,10 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-aop'
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'javax.servlet:javax.servlet-api'
     // security
     implementation 'org.springframework.boot:spring-boot-starter-security'
@@ -20,9 +23,7 @@ dependencies {
     implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel'
     // db
     implementation libraries.mysqlConnect
-    implementation libraries.mybatisPlus
     implementation libraries.shardingSphere
-    implementation libraries.jpa
     // test
     testImplementation libraries.junit
     // JUnit5需要排除junit-vintage
