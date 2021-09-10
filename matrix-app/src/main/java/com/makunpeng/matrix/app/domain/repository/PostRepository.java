@@ -10,4 +10,5 @@ import com.makunpeng.matrix.common.ddd.Repository;
  */
 public interface PostRepository extends Repository {
     Post findPost(Long pid);
+    Post save(Post post);
 }

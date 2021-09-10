@@ -43,8 +43,9 @@ public class PostRepositoryImpl implements PostRepository {
         return converter.toPost(postInfoDO, postBodyDO);
     }
 
-    public Post savePost(Post post) {
-
+    @Override
+    public Post save(Post post) {
         return null;
     }
+
 }

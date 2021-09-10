@@ -1,6 +1,7 @@
 package com.makunpeng.matrix.app.domain.model.post;
 
 import com.makunpeng.matrix.common.ddd.AggregateRoot;
+import com.makunpeng.matrix.common.ddd.EntityState;
 import lombok.*;
 
 /**
@@ -14,10 +15,11 @@ import lombok.*;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class Post implements AggregateRoot<Post> {
-    private PostId postId;
+public class Post implements AggregateRoot<PostId> {
+    private PostId id;
     private PostDesc desc;
     private PostBody body;
     private Integer commentCounts;
     private Integer likesCounts;
+    private EntityState state;
 }
