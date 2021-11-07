@@ -7,6 +7,7 @@ ext {
             caffein           : '3.0.2',
             junit             : '4.13.2',
             mysqlConnect      : '8.0.18',
+            pgConnect         : '42.2.24',
             mybatisPlus       : '3.4.3',
             shardingSphere    : '4.1.1',
             guava             : '30.1.1-jre'
@@ -16,10 +17,11 @@ ext {
             lombok           : "org.projectlombok:lombok:${versions.lombok}",
             junit            : "junit:junit:${versions.junit}",
             mysqlConnect     : "mysql:mysql-connector-java:${versions.mysqlConnect}",
+            pgConnect        : "org.postgresql:postgresql:${versions.pgConnect}",
             mybatisPlus      : "com.baomidou:mybatis-plus-boot-starter:${versions.mybatisPlus}",
             dynamicDatasource: "com.baomidou:dynamic-datasource-spring-boot-starter:${versions.dynamicDatasource}",
             shardingSphere   : "org.apache.shardingsphere:sharding-jdbc-spring-boot-starter:${versions.shardingSphere}",
-            guava            : "com.google.guava:guava:${versions.guava}",
+            guava            : "com.google.guava:guava:${versions.guava}"
     ]
 
     // 插件版本

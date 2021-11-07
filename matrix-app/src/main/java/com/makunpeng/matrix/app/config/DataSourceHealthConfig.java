@@ -13,9 +13,7 @@ import java.util.Map;
 
 @Configuration
 public class DataSourceHealthConfig extends DataSourceHealthContributorAutoConfiguration {
-
-    private String defaultQuery = "select 1";
-
+    private static final String defaultQuery = "select 1";
 
     public DataSourceHealthConfig(Map<String, DataSource> dataSources, ObjectProvider<DataSourcePoolMetadataProvider> metadataProviders) {
         super(dataSources, metadataProviders);

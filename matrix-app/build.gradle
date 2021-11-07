@@ -21,7 +21,7 @@ dependencies {
 //    // sentinel
 //    implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel'
     // db
-    implementation libraries.mysqlConnect
+    implementation libraries.pgConnect
     implementation libraries.shardingSphere
     // test
     testImplementation libraries.junit
