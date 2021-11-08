@@ -1,5 +1,6 @@
 package com.makunpeng.matrix.app.domain.post.aggregate;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 /**
@@ -8,6 +9,7 @@ import lombok.Data;
  * since
  **/
 @Data
+@AllArgsConstructor
 public class PostInfoId {
-    private Long postInfoId;
+    private Long Id;
 }

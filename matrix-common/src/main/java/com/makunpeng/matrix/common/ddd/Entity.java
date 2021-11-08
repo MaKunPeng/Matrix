@@ -6,7 +6,4 @@ package com.makunpeng.matrix.common.ddd;
  * @author MaKunPeng
  */
 public interface Entity<ID> {
-    ID getId();
-    EntityState getState();
-    void setState(EntityState state);
 }

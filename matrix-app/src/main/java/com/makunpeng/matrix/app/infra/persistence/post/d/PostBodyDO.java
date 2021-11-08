@@ -1,9 +1,6 @@
 package com.makunpeng.matrix.app.infra.persistence.post.d;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -17,6 +14,7 @@ import java.sql.Timestamp;
  **/
 @Entity
 @Table(name = "post_body")
+@Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -28,4 +26,10 @@ public class PostBodyDO {
     private String content;
     private Timestamp ctime;
     private Timestamp mtime;
+
+    public PostBodyDO(Long id, Long pid, String content) {
+        this.id = id;
+        this.pid = pid;
+        this.content = content;
+    }
 }

@@ -1,8 +1,11 @@
 package com.makunpeng.matrix.app.domain.post.repository;
 
-import com.makunpeng.matrix.app.domain.model.post.Post;
+import com.makunpeng.matrix.app.domain.post.aggregate.PostBodyA;
+import com.makunpeng.matrix.app.domain.post.aggregate.PostInfoA;
+import com.makunpeng.matrix.app.interfaces.post.query.PostBodyQuery;
 import com.makunpeng.matrix.app.interfaces.post.query.PostInfoListQuery;
 import com.makunpeng.matrix.app.interfaces.post.query.PostInfoSingleQuery;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -13,6 +16,7 @@ import java.util.List;
  * @since
  **/
 public interface PostRepository {
-    Post find(PostInfoSingleQuery query);
-    List<Post> listPost(PostInfoListQuery query);
+    PostInfoA findPostInfo(PostInfoSingleQuery query);
+    Page<PostInfoA> listPostInfo(PostInfoListQuery query);
+    PostBodyA findPostBody(PostBodyQuery query);
 }

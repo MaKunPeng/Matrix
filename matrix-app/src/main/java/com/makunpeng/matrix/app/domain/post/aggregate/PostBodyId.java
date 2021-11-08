@@ -9,5 +9,5 @@ import lombok.Data;
  **/
 @Data
 public class PostBodyId {
-    private PostBodyId postBodyID;
+    private Long Id;
 }

@@ -16,11 +16,10 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 public class PostInfoA {
     private PostInfoId postId;
-    private Long id;
+    private Long pid;
     private Long uid;
     private String title;
     private String summary;
-    private PostBodyA postBody;
     private Timestamp ctime;
     private Timestamp mtime;
 }

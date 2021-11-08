@@ -1,20 +1,22 @@
 package com.makunpeng.matrix.app.domain.post.aggregate;
 
+import com.makunpeng.matrix.common.ddd.AggregateRoot;
+import lombok.*;
+
 import java.sql.Timestamp;
 
 /**
+ * 文章内容聚合
  * @author MaKunPeng
  * @version 1.0
- * since
+ * @since 1.0
  **/
-public class PostBodyA {
-    private PostBodyId postId;
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+@Getter
+public class PostBodyA implements AggregateRoot<PostBodyId> {
+    private PostBodyId postBodyId;
     private PostInfoId postInfoId;
-    private Long id;
-    private Long pid;
-    private String title;
-    private String summary;
-    private PostBodyA postBody;
-    private Timestamp ctime;
-    private Timestamp mtime;
+    private String content;
 }
