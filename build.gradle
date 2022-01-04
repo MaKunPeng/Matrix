@@ -18,7 +18,7 @@ buildscript {
 }
 
 // 配置spring插件
-// apply plugin: 'org.springframework.boot' Srping Boot 插件子工程自己指定
+// apply plugin: 'org.springframework.boot' Spring Boot 插件子工程自己指定
 apply plugin: 'io.spring.dependency-management'
 
 // 版本

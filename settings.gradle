@@ -1,4 +1,4 @@
 rootProject.name = 'matrix'
 include 'matrix-uaa'
 include 'matrix-common'
-include 'matrix-app'
+include 'matrix-post'

@@ -1,0 +1,29 @@
+# 数据源配置
+spring:
+  shardingsphere:
+    datasource:
+      name: ds
+      ds:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: org.postgresql.Driver
+        jdbc-url: jdbc:postgresql://120.27.92.115:5432/matrix
+        username: postgres
+        password: postgres2345wert
+
+    sharding:
+      tables:
+        post_info:
+          key-generator:
+            column: id
+            type: SNOWFLAKE
+
+      default-key-generator:
+        type: SNOWFLAKE
+        column: id
+        props:
+          worker.id: 1
+          max.tolerate.time.difference.milliseconds: 100
+
+    props:
+      sql:
+        show: true
