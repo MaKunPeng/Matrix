@@ -28,6 +28,7 @@ allprojects {
     apply plugin: 'idea'
 
     group 'com.makunpeng.matrix'
+
     repositories {
         maven{
             url = 'https://maven.aliyun.com/nexus/content/repositories/central/'

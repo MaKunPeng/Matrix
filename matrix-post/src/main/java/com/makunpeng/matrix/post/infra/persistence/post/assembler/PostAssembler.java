@@ -9,7 +9,9 @@ import com.makunpeng.matrix.post.interfaces.command.PostPublishCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 /**
  * @author Aaron Ma
@@ -33,7 +35,10 @@ public class PostAssembler {
         return post;
     }
 
-    public Post doToPost(@NotNull(message = "文章不存在") PostInfoDO postInfoDO, @NotNull(message = "文章不存在") PostBodyDO postBodyDO) {
+    public Post doToPost(@NotNull PostInfoDO postInfoDO, @NotNull PostBodyDO postBodyDO) {
+        Objects.requireNonNull(postInfoDO, "文章信息不存在");
+        Objects.requireNonNull(postBodyDO, "文章内容不存在");
+
         PostInfo postInfo = postInfoAssembler.doToPostInfo(postInfoDO);
         PostBody postBody = postBodyAssembler.doToPostBody(postBodyDO);
         Post post = new Post();

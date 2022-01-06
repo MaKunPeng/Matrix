@@ -8,14 +8,10 @@ spring:
   profiles:
     active: datasource
   jpa:
-    hibernate:
-      ddl-auto: update
     show-sql: true
 
 logging:
   level:
     root: debug
-  path:
-    ./log
-  file:
-    matrix-post.log
+  path: ./log/post
+  file: matrix-post.log

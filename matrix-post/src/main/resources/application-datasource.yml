@@ -27,3 +27,8 @@ spring:
     props:
       sql:
         show: true
+  jpa:
+    properties:
+      hibernate:
+        temp:
+          use

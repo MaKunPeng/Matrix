@@ -1,5 +1,7 @@
 package com.makunpeng.matrix.post.common.api;
 
+import lombok.Data;
+
 import javax.annotation.Nullable;
 import java.io.Serializable;
 
@@ -8,6 +10,7 @@ import java.io.Serializable;
  * @param <T>
  * @author Aaron Ma
  */
+@Data
 public class ResponseResult<T> implements Serializable {
     private static final long serialVersionUID = 1L;
     private T data;

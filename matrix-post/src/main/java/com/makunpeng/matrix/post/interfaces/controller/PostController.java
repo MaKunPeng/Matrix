@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * 文章请求控制器
  * @author Aaron Ma
@@ -70,8 +72,9 @@ public class PostController {
      * @return 文章分页列表
      */
     @GetMapping(value = "/list")
-    public ResponseResult<Page<PostInfoDTO>> listPostInfo(PostInfoListQuery postInfoListQuery) {
+    public ResponseResult<List<PostInfoDTO>> listPostInfo(@RequestBody PostInfoListQuery postInfoListQuery) {
         Page<PostInfoDTO> postInfoDTOS = postQService.listPostInfo(postInfoListQuery);
-        return ResponseResult.ok().of(postInfoDTOS);
+        List<PostInfoDTO> content = postInfoDTOS.getContent();
+        return ResponseResult.ok().of(content);
     }
 }

@@ -5,21 +5,36 @@ import com.makunpeng.matrix.post.interfaces.command.PostPublishCommand;
 import com.makunpeng.matrix.post.interfaces.command.PostUpdateCommand;
 import com.makunpeng.matrix.post.interfaces.dto.PostInfoDTO;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureWebMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 /**
  * PostController 单元测试
  * @author Aaron Ma
  */
 @SpringBootTest
+@AutoConfigureMockMvc
 class PostControllerTest {
     @Autowired
     private PostController postController;
+    @Autowired
+    private MockMvc mockMvc;
 
-    private static Logger logger = LoggerFactory.getLogger(PostControllerTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(PostControllerTest.class);
 
     @Test
     void publish() {
@@ -29,26 +44,38 @@ class PostControllerTest {
         postPublishCommand.setSummary("Test publish");
         postPublishCommand.setContent("# Test");
         ResponseResult<PostInfoDTO> result = postController.publish(postPublishCommand);
-        logger.info("文章发布成功{}", result);
+        logger.info("文章发布成功");
     }
 
     @Test
     void update() {
         PostUpdateCommand postUpdateCommand = new PostUpdateCommand();
-        postUpdateCommand.setPid(1L);
-        postUpdateCommand.setContent("Test update");
+        postUpdateCommand.setPid(57633150L);
+        postUpdateCommand.setTitle("Test");
+        postUpdateCommand.setSummary("Test update");
+        postUpdateCommand.setContent("# Test update");
 
-        ResponseResult result = postController.update(postUpdateCommand);
+        postController.update(postUpdateCommand);
         logger.info("文章更新成功");
     }
 
     @Test
-    void getPostDetails() {
-        postController.getPostDetails(null);
+    void getPostDetails() throws Exception {
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/post/details/685890023588888576"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andDo(MockMvcResultHandlers.print())
+                .andReturn();
+        logger.info(mvcResult.getResponse().getContentAsString());
     }
 
     @Test
-    void listPostInfo() {
-        postController.listPostInfo(null);
+    void listPostInfo() throws Exception {
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/post/list")
+                .content("{\"uid\":1,\"pageSize\":10,\"pageNumber\":0}")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andDo(MockMvcResultHandlers.print())
+                .andReturn();
+        logger.info(mvcResult.getResponse().getContentAsString());
     }
 }

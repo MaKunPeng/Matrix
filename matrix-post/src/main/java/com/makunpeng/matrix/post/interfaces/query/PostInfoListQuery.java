@@ -9,7 +9,7 @@ import lombok.Data;
  **/
 @Data
 public class PostInfoListQuery {
-    private String uid;
+    private Long uid;
     private String catalog;
     private Integer pageSize;
     private Integer pageNumber;

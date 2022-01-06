@@ -11,6 +11,8 @@ jitwatch.out
 .gradle
 .idea
 *.iml
+*.ipr
+*.iws
 target
 simulator/src/main/resources/application.conf
 

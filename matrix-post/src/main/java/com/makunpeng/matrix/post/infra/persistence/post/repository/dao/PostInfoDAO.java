@@ -18,12 +18,14 @@ public interface PostInfoDAO extends JpaRepository<PostInfoDO, Long> {
 
     /**
      * 根据用户ID分页查询文章列表
+     * 分页页号是从第0页开始
      * @param uid
      * @param pageable
      * @return
      */
-    @Query(value = "select pi.* from post_info pi where pi.uid = :uid",
-            countQuery = "select count(*) from post_info pi where pi.uid = :uid",
-            nativeQuery = true)
-    Page<PostInfoDTO> findPostInfosByUid(@Param("uid") String uid, Pageable pageable);
+    @Query(value = "select new com.makunpeng.matrix.post.interfaces.dto.PostInfoDTO" +
+            "(pi.id, pi.pid, pi.uid, pi.title, pi.summary, pi.ctime, pi.mtime)" +
+            " from PostInfoDO pi where pi.uid = :uid",
+            countQuery = "select count(pi.id) from post_info pi where pi.uid = :uid")
+    Page<PostInfoDTO> findPostInfosByUid(@Param("uid") Long uid, Pageable pageable);
 }
