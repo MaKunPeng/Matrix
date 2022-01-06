@@ -3,6 +3,8 @@ ext {
     versions = [
             springCloud       : 'Hoxton.SR11',
             springCloudAlibaba: '2.2.1.RELEASE',
+            springCache       : '',
+            springRedis       : '',
             lombok            : '1.18.20',
             caffein           : '3.0.2',
             junit             : '4.13.2',

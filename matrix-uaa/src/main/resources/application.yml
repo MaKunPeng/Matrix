@@ -15,7 +15,3 @@ spring:
 logging:
   level:
     root: debug
-  path:
-    ./log
-  file:
-    matrix-post.log
