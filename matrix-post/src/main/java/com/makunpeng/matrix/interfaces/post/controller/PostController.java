@@ -4,14 +4,13 @@ import com.makunpeng.matrix.infra.post.persistence.assembler.PostInfoAssembler;
 import com.makunpeng.matrix.application.post.PostService;
 import com.makunpeng.matrix.application.post.PostQService;
 import com.makunpeng.matrix.domain.post.aggregate.Post;
-import com.makunpeng.matrix.interfaces.post.dto.PostDetailDTO;
+import com.makunpeng.matrix.interfaces.post.dto.PostDetailsDTO;
 import com.makunpeng.matrix.interfaces.post.command.PostPublishCommand;
 import com.makunpeng.matrix.interfaces.post.command.PostUpdateCommand;
 import com.makunpeng.matrix.interfaces.post.dto.PostInfoDTO;
 import com.makunpeng.matrix.interfaces.post.query.PostInfoListQuery;
 import com.makunpeng.matrix.common.api.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,9 +22,9 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/post")
 public class PostController {
-    private PostService postService;
-    private PostQService postQService;
-    private PostInfoAssembler postInfoAssembler;
+    private final PostService postService;
+    private final PostQService postQService;
+    private final PostInfoAssembler postInfoAssembler;
 
     @Autowired
     public PostController(PostService postService, PostQService postQService, PostInfoAssembler postInfoAssembler) {
@@ -61,9 +60,9 @@ public class PostController {
      * @return 文章详情
      */
     @GetMapping(value = "/details/{pid}")
-    public ResponseResult<PostDetailDTO> getPostDetails(@PathVariable("pid") String pid) {
-        PostDetailDTO postDetailDTO = new PostDetailDTO();
-        return ResponseResult.ok().of(postDetailDTO);
+    public ResponseResult<PostDetailsDTO> getPostDetails(@PathVariable("pid") Long pid) {
+        PostDetailsDTO postDetails = postQService.getPostDetails(pid);
+        return ResponseResult.ok().of(postDetails);
     }
 
     /**

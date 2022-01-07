@@ -4,6 +4,7 @@ import com.makunpeng.matrix.common.api.ResponseResult;
 import com.makunpeng.matrix.interfaces.post.command.PostPublishCommand;
 import com.makunpeng.matrix.interfaces.post.command.PostUpdateCommand;
 import com.makunpeng.matrix.interfaces.post.dto.PostInfoDTO;
+import org.junit.Ignore;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,6 +32,7 @@ class PostControllerTest {
 
     private static final Logger logger = LoggerFactory.getLogger(PostControllerTest.class);
 
+    @Ignore
     @Test
     void publish() {
         PostPublishCommand postPublishCommand = new PostPublishCommand();
@@ -42,6 +44,7 @@ class PostControllerTest {
         logger.info("文章发布成功");
     }
 
+    @Ignore
     @Test
     void update() {
         PostUpdateCommand postUpdateCommand = new PostUpdateCommand();
@@ -56,7 +59,7 @@ class PostControllerTest {
 
     @Test
     void getPostDetails() throws Exception {
-        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/post/details/685890023588888576"))
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/post/details/72601489"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andDo(MockMvcResultHandlers.print())
                 .andReturn();
