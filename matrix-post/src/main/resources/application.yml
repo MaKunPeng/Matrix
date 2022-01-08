@@ -6,12 +6,12 @@ server:
 
 spring:
   profiles:
-    active: datasource
+    include:
+      - datasource
+    active: dev
   jpa:
     show-sql: true
 
 logging:
   level:
     root: debug
-  path: ./log/post
-  file: matrix-post.log
