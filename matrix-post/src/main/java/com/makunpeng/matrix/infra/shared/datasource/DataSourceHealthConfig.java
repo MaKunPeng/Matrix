@@ -1,4 +1,4 @@
-package com.makunpeng.matrix.config;
+package com.makunpeng.matrix.infra.shared.datasource;
 
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.actuate.autoconfigure.jdbc.DataSourceHealthContributorAutoConfiguration;

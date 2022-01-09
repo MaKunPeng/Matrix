@@ -13,17 +13,19 @@ ext {
             pgConnect         : '42.2.24',
             shardingSphere    : '4.1.1',
             guava             : '30.1.1-jre',
-            javaxAnnotation   : '1.3.2'
+            javaxAnnotation   : '1.3.2',
+            commonsPool2      : '2.8.1'
     ]
     // 依赖库集合
     libraries = [
-            lombok           : "org.projectlombok:lombok:${versions.lombok}",
-            junit            : "junit:junit:${versions.junit}",
-            mysqlConnect     : "mysql:mysql-connector-java:${versions.mysqlConnect}",
-            pgConnect        : "org.postgresql:postgresql:${versions.pgConnect}",
-            shardingSphere   : "org.apache.shardingsphere:sharding-jdbc-spring-boot-starter:${versions.shardingSphere}",
-            guava            : "com.google.guava:guava:${versions.guava}",
-            queryDslJpa      : "com.querydsl:querydsl-jpa:${versions.queryDsl}"
+            lombok            : "org.projectlombok:lombok:${versions.lombok}",
+            junit             : "junit:junit:${versions.junit}",
+            mysqlConnect      : "mysql:mysql-connector-java:${versions.mysqlConnect}",
+            pgConnect         : "org.postgresql:postgresql:${versions.pgConnect}",
+            shardingSphere    : "org.apache.shardingsphere:sharding-jdbc-spring-boot-starter:${versions.shardingSphere}",
+            guava             : "com.google.guava:guava:${versions.guava}",
+            queryDslJpa       : "com.querydsl:querydsl-jpa:${versions.queryDsl}",
+            commonsPool2      : "org.apache.commons:commons-pool2:${versions.commonsPool2}"
     ]
 
     // 插件版本

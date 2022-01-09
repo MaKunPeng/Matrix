@@ -1,5 +1,6 @@
 package com.makunpeng.matrix.application.post.impl;
 
+import com.makunpeng.matrix.infra.post.persistence.d.PostInfoDO;
 import com.makunpeng.matrix.infra.post.persistence.d.QPostBodyDO;
 import com.makunpeng.matrix.infra.post.persistence.d.QPostInfoDO;
 import com.makunpeng.matrix.infra.post.persistence.repository.dao.PostInfoDAO;
@@ -10,6 +11,7 @@ import com.makunpeng.matrix.application.post.PostQService;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,13 +24,13 @@ import java.util.List;
  */
 @Service
 public class PostQServiceImpl implements PostQService {
-    private PostInfoDAO postInfoDAO;
     private final JPAQueryFactory jpaQueryFactory;
+    private final PostInfoDAO postInfoDAO;
 
     @Autowired
-    public PostQServiceImpl(PostInfoDAO postInfoDAO, JPAQueryFactory jpaQueryFactory) {
-        this.postInfoDAO = postInfoDAO;
+    public PostQServiceImpl(JPAQueryFactory jpaQueryFactory, PostInfoDAO postInfoDAO) {
         this.jpaQueryFactory = jpaQueryFactory;
+        this.postInfoDAO = postInfoDAO;
     }
 
     /**
@@ -57,6 +59,7 @@ public class PostQServiceImpl implements PostQService {
      * @param pid 文章id
      * @return 文章详情
      */
+    @Cacheable(value = "post", key = "#pid")
     @Override
     public PostDetailsDTO getPostDetails(Long pid) {
         QPostInfoDO postInfoDO = QPostInfoDO.postInfoDO;

@@ -4,13 +4,13 @@ build
 build-cache
 test-output
 jitwatch.out
-.log
 .DS_Store
 .classpath
 .settings
 .project
 .gradle
 .idea
+*.log
 *.iml
 *.ipr
 *.iws

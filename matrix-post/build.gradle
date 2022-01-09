@@ -25,7 +25,9 @@ dependencies {
 //    implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel'
     // db
     implementation libraries.pgConnect
-    implementation libraries.shardingSphere
+    // redis lettuce 需要引入此依赖
+    implementation libraries.commonsPool2
+//    implementation libraries.shardingSphere
     // test
     testImplementation libraries.junit
     // JUnit5需要排除junit-vintage

@@ -14,4 +14,13 @@ spring:
 
 logging:
   level:
-    root: debug
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql:
+              BasicBinder: trace
+        engine:
+          QueryParameters: debug
+#  level:
+#    root: debug
