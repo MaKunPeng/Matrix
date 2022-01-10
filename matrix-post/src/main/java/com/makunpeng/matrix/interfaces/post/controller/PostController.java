@@ -49,7 +49,7 @@ public class PostController {
      * 更新文章
      * @param postUpdateCommand 请求参数
      */
-    @PutMapping(value = "/publish")
+    @PutMapping(value = "/update")
     public ResponseResult<Object> update(@RequestBody PostUpdateCommand postUpdateCommand) {
         postService.update(postUpdateCommand);
         return ResponseResult.of(ApiResultStatus.SUCCESS);

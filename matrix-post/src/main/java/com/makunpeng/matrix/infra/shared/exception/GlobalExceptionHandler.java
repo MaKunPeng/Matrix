@@ -22,10 +22,8 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
     public ResponseResult<?> exceptionHandler(Exception e) {
-        if (e instanceof RuntimeException) {
-            return ResponseResult.of(ApiResultStatus.FAILED);
-        }
         logger.error("业务发生异常", e);
+
         return ResponseResult.of(ApiResultStatus.FAILED);
     }
 }

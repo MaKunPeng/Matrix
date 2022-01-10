@@ -11,7 +11,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 /**
- * 请求日志切面 <br>
+ * 日志切面 <br>
  * 切面顺序为 Ordered.LOWEST_PRECEDENCE - 1，目的是为保证该切面执行顺序在 @Cacheable 注解之前，
  * 因为 @Cacheable 的默认 order 属性也是 Ordered.LOWEST_PRECEDENCE
  *
@@ -21,10 +21,10 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Order(Ordered.LOWEST_PRECEDENCE - 1)
 @Component
-public class ApplicationLevelLogAspect {
-    private static final Logger logger = LoggerFactory.getLogger(ApplicationLevelLogAspect.class);
+public class ApplicationLogAspect {
+    private static final Logger logger = LoggerFactory.getLogger(ApplicationLogAspect.class);
 
-    @Pointcut("execution(* com.makunpeng.matrix.application..*.*(..))")
+    @Pointcut("execution(public * com.makunpeng.matrix.application..*Impl.*(..))")
     private void pointCut() {
 
     };
