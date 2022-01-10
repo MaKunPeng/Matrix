@@ -1,15 +1,16 @@
 package com.makunpeng.matrix.interfaces.post.controller;
 
-import com.makunpeng.matrix.infra.post.persistence.assembler.PostInfoAssembler;
-import com.makunpeng.matrix.application.post.PostService;
 import com.makunpeng.matrix.application.post.PostQService;
+import com.makunpeng.matrix.application.post.PostService;
 import com.makunpeng.matrix.domain.post.aggregate.Post;
-import com.makunpeng.matrix.interfaces.post.dto.PostDetailsDTO;
+import com.makunpeng.matrix.infra.post.persistence.assembler.PostInfoAssembler;
+import com.makunpeng.matrix.interfaces.post.api.ApiResultStatus;
+import com.makunpeng.matrix.interfaces.post.api.ResponseResult;
 import com.makunpeng.matrix.interfaces.post.command.PostPublishCommand;
 import com.makunpeng.matrix.interfaces.post.command.PostUpdateCommand;
+import com.makunpeng.matrix.interfaces.post.dto.PostDetailsDTO;
 import com.makunpeng.matrix.interfaces.post.dto.PostInfoDTO;
 import com.makunpeng.matrix.interfaces.post.query.PostInfoListQuery;
-import com.makunpeng.matrix.common.api.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,7 +42,7 @@ public class PostController {
     @PostMapping(value = "/publish")
     public ResponseResult<PostInfoDTO> publish(@RequestBody PostPublishCommand postPublishCommand) {
         Post post = postService.publish(postPublishCommand);
-        return ResponseResult.ok().of(postInfoAssembler.entityToPostInfoDTO(post.getPostInfo()));
+        return ResponseResult.of(ApiResultStatus.SUCCESS, postInfoAssembler.entityToPostInfoDTO(post.getPostInfo()));
     }
 
     /**
@@ -49,9 +50,9 @@ public class PostController {
      * @param postUpdateCommand 请求参数
      */
     @PutMapping(value = "/publish")
-    public ResponseResult update(@RequestBody PostUpdateCommand postUpdateCommand) {
+    public ResponseResult<Object> update(@RequestBody PostUpdateCommand postUpdateCommand) {
         postService.update(postUpdateCommand);
-        return ResponseResult.ok().of(null);
+        return ResponseResult.of(ApiResultStatus.SUCCESS);
     }
 
     /**
@@ -62,7 +63,7 @@ public class PostController {
     @GetMapping(value = "/details/{pid}")
     public ResponseResult<PostDetailsDTO> getPostDetails(@PathVariable("pid") Long pid) {
         PostDetailsDTO postDetails = postQService.getPostDetails(pid);
-        return ResponseResult.ok().of(postDetails);
+        return ResponseResult.of(ApiResultStatus.SUCCESS, postDetails);
     }
 
     /**
@@ -73,6 +74,6 @@ public class PostController {
     @GetMapping(value = "/list")
     public ResponseResult<List<PostInfoDTO>> listPostInfo(@RequestBody PostInfoListQuery postInfoListQuery) {
         List<PostInfoDTO> postInfoDTOS = postQService.listPostInfo(postInfoListQuery);
-        return ResponseResult.ok().of(postInfoDTOS);
+        return ResponseResult.of(ApiResultStatus.SUCCESS, postInfoDTOS);
     }
 }

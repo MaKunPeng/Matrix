@@ -1,6 +1,7 @@
 package com.makunpeng.matrix.infra.shared.exception;
 
-import com.makunpeng.matrix.common.api.ResponseResult;
+import com.makunpeng.matrix.interfaces.post.api.ApiResultStatus;
+import com.makunpeng.matrix.interfaces.post.api.ResponseResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -21,7 +22,10 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
     public ResponseResult<?> exceptionHandler(Exception e) {
+        if (e instanceof RuntimeException) {
+            return ResponseResult.of(ApiResultStatus.FAILED);
+        }
         logger.error("业务发生异常", e);
-        return ResponseResult.err(e.getMessage()).of(null);
+        return ResponseResult.of(ApiResultStatus.FAILED);
     }
 }

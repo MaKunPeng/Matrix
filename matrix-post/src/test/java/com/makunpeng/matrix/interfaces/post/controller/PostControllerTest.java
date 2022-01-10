@@ -1,11 +1,7 @@
 package com.makunpeng.matrix.interfaces.post.controller;
 
-import com.makunpeng.matrix.common.api.ResponseResult;
-import com.makunpeng.matrix.infra.shared.util.JsonUtils;
 import com.makunpeng.matrix.interfaces.post.command.PostPublishCommand;
 import com.makunpeng.matrix.interfaces.post.command.PostUpdateCommand;
-import com.makunpeng.matrix.interfaces.post.dto.PostDetailsDTO;
-import com.makunpeng.matrix.interfaces.post.dto.PostInfoDTO;
 import org.junit.Ignore;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -42,7 +38,7 @@ class PostControllerTest {
         postPublishCommand.setTitle("Test");
         postPublishCommand.setSummary("Test publish");
         postPublishCommand.setContent("# Test");
-        ResponseResult<PostInfoDTO> result = postController.publish(postPublishCommand);
+        postController.publish(postPublishCommand);
         logger.info("文章发布成功");
     }
 
@@ -77,24 +73,5 @@ class PostControllerTest {
                 .andDo(MockMvcResultHandlers.print())
                 .andReturn();
         logger.info(mvcResult.getResponse().getContentAsString());
-    }
-
-    @Test
-    void testJson() {
-        String json = "{\"pid\":72601489,\"postInfoDTO\":{\"id\":686368495725707264,\"pid\":72601489,\"uid\":2,\"title\":\"Test\",\"summary\":\"Test publish\",\"ctime\":1641572601498,\"mtime\":1641572601498},\"content\":\"# Test\"}";
-        PostDetailsDTO a = new PostDetailsDTO();
-        a.setPid(111L);
-        a.setContent("asdfasdf");
-        PostInfoDTO b = new PostInfoDTO();
-        b.setPid(111L);
-        b.setTitle("SDF");
-        b.setSummary("S");
-        a.setPostInfoDTO(b);
-//        PostDetailsDTO parse = JsonUtils.parse(json, PostDetailsDTO.class);
-//        System.out.printf(parse.toString());
-        String s = JsonUtils.toJson(a);
-        PostDetailsDTO parse = JsonUtils.parse(s, PostDetailsDTO.class);
-        System.out.println(s);
-
     }
 }

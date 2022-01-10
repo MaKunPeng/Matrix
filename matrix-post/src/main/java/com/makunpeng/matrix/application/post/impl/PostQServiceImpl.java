@@ -59,7 +59,7 @@ public class PostQServiceImpl implements PostQService {
      * @param pid 文章id
      * @return 文章详情
      */
-    @Cacheable(value = "post", key = "#pid")
+    @Cacheable(value = "post", key = "'details:'.concat(#pid)")
     @Override
     public PostDetailsDTO getPostDetails(Long pid) {
         QPostInfoDO postInfoDO = QPostInfoDO.postInfoDO;

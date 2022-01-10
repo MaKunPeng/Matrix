@@ -85,6 +85,8 @@ public class SpringCacheConfig extends CachingConfigurerSupport {
                 .entryTtl(Duration.ofSeconds(3 * 3600))
                 .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(new StringRedisSerializer()))
                 .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(jsonRedisSerializer))
+                // 变双冒号为单冒号
+                .computePrefixWith(name -> name + ":")
                 .disableCachingNullValues();
         return redisCacheConfiguration;
     }
