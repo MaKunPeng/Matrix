@@ -42,7 +42,6 @@ public class SnowflakeKeyGenerator {
 
     private static final int MAX_TOLERATE_TIME_DIFFERENCE_MILLISECONDS = 10;
 
-    @Autowired
     private static TimeService timeService;
 
     private int sequenceOffset = -1;
@@ -65,8 +64,8 @@ public class SnowflakeKeyGenerator {
         return "SNOWFLAKE";
     }
 
-    public SnowflakeKeyGenerator() {
-
+    public SnowflakeKeyGenerator(TimeService timeService) {
+        this.timeService = timeService;
     }
 
     public synchronized Long generateKey() {

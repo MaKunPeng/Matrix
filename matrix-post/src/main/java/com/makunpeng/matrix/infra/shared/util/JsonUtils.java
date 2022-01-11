@@ -2,10 +2,7 @@ package com.makunpeng.matrix.infra.shared.util;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import org.slf4j.Logger;
@@ -13,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 
 import java.io.IOException;
-import java.util.Collection;
 
 /**
  * JSON 工具类
@@ -39,7 +35,7 @@ public class JsonUtils {
      * @param jsonStr json字符串
      * @param classType 对象类型
      * @param <T> 对象类型
-     * @return
+     * @return 对象
      */
     public static <T> T parse(String jsonStr, Class<T> classType) {
         if (StringUtils.isEmpty(jsonStr)) {
@@ -90,6 +86,15 @@ public class JsonUtils {
         } catch (IOException e) {
             logger.warn("An error occurred while transforming Object to Json String.", e);
         }
+        return null;
+    }
+
+    /**
+     * 日志格式 Json，根据自定义注解处理
+     * @param obj param
+     * @return json
+     */
+    public static String toJsonForLog(Object obj) {
         return null;
     }
 }

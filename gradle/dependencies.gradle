@@ -14,7 +14,9 @@ ext {
             shardingSphere    : '4.1.1',
             guava             : '30.1.1-jre',
             javaxAnnotation   : '1.3.2',
-            commonsPool2      : '2.8.1'
+            commonsPool2      : '2.8.1',
+            commonsIO         : '2.11.0',
+            commonsLang3      : '3.12.0'
     ]
     // 依赖库集合
     libraries = [
@@ -25,7 +27,9 @@ ext {
             shardingSphere    : "org.apache.shardingsphere:sharding-jdbc-spring-boot-starter:${versions.shardingSphere}",
             guava             : "com.google.guava:guava:${versions.guava}",
             queryDslJpa       : "com.querydsl:querydsl-jpa:${versions.queryDsl}",
-            commonsPool2      : "org.apache.commons:commons-pool2:${versions.commonsPool2}"
+            commonsPool2      : "org.apache.commons:commons-pool2:${versions.commonsPool2}",
+            commonsIO         : "commons-io:commons-io:${versions.commonsIO}",
+            commonsLang3      : "org.apache.commons:commons-lang3:${versions.commonsLang3}"
     ]
 
     // 插件版本

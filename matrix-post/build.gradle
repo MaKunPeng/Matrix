@@ -27,6 +27,8 @@ dependencies {
     implementation libraries.pgConnect
     // redis lettuce 需要引入此依赖
     implementation libraries.commonsPool2
+    implementation libraries.commonsIO
+    implementation libraries.commonsLang3
 //    implementation libraries.shardingSphere
     // test
     testImplementation libraries.junit
