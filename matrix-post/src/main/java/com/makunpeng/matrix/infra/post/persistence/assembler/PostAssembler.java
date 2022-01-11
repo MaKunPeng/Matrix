@@ -1,8 +1,8 @@
 package com.makunpeng.matrix.infra.post.persistence.assembler;
 
 import com.makunpeng.matrix.domain.post.aggregate.Post;
-import com.makunpeng.matrix.domain.post.aggregate.PostBody;
-import com.makunpeng.matrix.domain.post.aggregate.PostInfo;
+import com.makunpeng.matrix.domain.post.entity.PostBody;
+import com.makunpeng.matrix.domain.post.entity.PostInfo;
 import com.makunpeng.matrix.infra.post.persistence.d.PostBodyDO;
 import com.makunpeng.matrix.infra.post.persistence.d.PostInfoDO;
 import com.makunpeng.matrix.interfaces.post.command.PostPublishCommand;
@@ -27,8 +27,19 @@ public class PostAssembler {
         this.postBodyAssembler = postBodyAssembler;
     }
 
+    /**
+     * 根据发布命令组装领域对象
+     * @param command 发布命令
+     * @return Post领域对象
+     */
     public Post dtoToPost(PostPublishCommand command) {
         Post post = new Post();
+        // 设置文章编码
+        String value = String.valueOf(System.currentTimeMillis());
+        String substring = value.substring(value.length() - 8);
+        long nextLong = Long.parseLong(substring);
+        command.setPid(nextLong);
+
         post.setPostInfo(postInfoAssembler.dtoToPostInfo(command));
         post.setPostBody(postBodyAssembler.dtoToPostBody(command));
         return post;

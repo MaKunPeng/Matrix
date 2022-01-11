@@ -1,5 +1,7 @@
 package com.makunpeng.matrix.interfaces.post.api;
 
+import org.springframework.http.HttpStatus;
+
 /**
  * API调用结果状态
  *
@@ -29,6 +31,24 @@ public enum ApiResultStatus {
 
     public String getSub_msg() {
         return sub_msg;
+    }
+
+    /**
+     * 获取对应的 HTTP 状态码
+     * @return HTTP 状态码
+     */
+    public HttpStatus httpStatus() {
+        char flag = this.code.charAt(0);
+        if (flag == '1') {
+            return HttpStatus.OK;
+        }
+        if (flag == '2') {
+            return HttpStatus.BAD_REQUEST;
+        }
+        if (flag == '4') {
+            return HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return HttpStatus.OK;
     }
 
     private final String code;

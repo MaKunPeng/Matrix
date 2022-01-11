@@ -1,7 +1,9 @@
-package com.makunpeng.matrix.domain.post.aggregate;
+package com.makunpeng.matrix.domain.post.entity;
 
 import com.makunpeng.matrix.common.ddd.Entity;
 import lombok.*;
+
+import java.sql.Timestamp;
 
 /**
  * 文章内容聚合

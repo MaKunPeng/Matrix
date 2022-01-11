@@ -39,7 +39,7 @@ public class PostController {
      * @param postPublishCommand 请求参数
      * @return null
      */
-    @PostMapping(value = "/publish")
+    @PostMapping()
     public ResponseResult<PostInfoDTO> publish(@RequestBody PostPublishCommand postPublishCommand) {
         Post post = postService.publish(postPublishCommand);
         return ResponseResult.of(ApiResultStatus.SUCCESS, postInfoAssembler.entityToPostInfoDTO(post.getPostInfo()));
@@ -49,9 +49,15 @@ public class PostController {
      * 更新文章
      * @param postUpdateCommand 请求参数
      */
-    @PutMapping(value = "/update")
+    @PutMapping(value = "/{pid}")
     public ResponseResult<Object> update(@RequestBody PostUpdateCommand postUpdateCommand) {
         postService.update(postUpdateCommand);
+        return ResponseResult.of(ApiResultStatus.SUCCESS);
+    }
+
+    @DeleteMapping("/{pid}")
+    public ResponseResult<Object> delete(@PathVariable("pid") Long pid) {
+        postService.delete(pid);
         return ResponseResult.of(ApiResultStatus.SUCCESS);
     }
 

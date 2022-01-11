@@ -9,10 +9,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 /**
+ * PostInfo 数据库对象JPA接口
  * @author MaKunPeng
  * @version 1.0
- * since
+ * @since 1.0
  **/
 public interface PostInfoDAO extends JpaRepository<PostInfoDO, Long> {
+
     PostInfoDO findByPid(Long pid);
+
+    void deleteByPid(Long pid);
 }

@@ -1,7 +1,7 @@
 package com.makunpeng.matrix.infra.post.persistence.assembler;
 
-import com.makunpeng.matrix.domain.post.aggregate.PostBody;
-import com.makunpeng.matrix.domain.post.aggregate.PostBodyId;
+import com.makunpeng.matrix.domain.post.entity.PostBody;
+import com.makunpeng.matrix.domain.post.entity.PostBodyId;
 import com.makunpeng.matrix.infra.post.persistence.d.PostBodyDO;
 import com.makunpeng.matrix.interfaces.post.command.PostPublishCommand;
 import org.springframework.stereotype.Component;
@@ -24,7 +24,7 @@ public class PostBodyAssembler {
     public PostBody dtoToPostBody(PostPublishCommand command) {
         return new PostBody(
                 new PostBodyId(null),
-                null,
+                command.getPid(),
                 command.getContent());
     }
 

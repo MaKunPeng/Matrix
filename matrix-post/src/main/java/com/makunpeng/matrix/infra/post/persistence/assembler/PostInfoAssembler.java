@@ -1,7 +1,7 @@
 package com.makunpeng.matrix.infra.post.persistence.assembler;
 
-import com.makunpeng.matrix.domain.post.aggregate.PostInfo;
-import com.makunpeng.matrix.domain.post.aggregate.PostInfoId;
+import com.makunpeng.matrix.domain.post.entity.PostInfo;
+import com.makunpeng.matrix.domain.post.entity.PostInfoId;
 import com.makunpeng.matrix.infra.post.persistence.d.PostInfoDO;
 import com.makunpeng.matrix.interfaces.post.command.PostPublishCommand;
 import com.makunpeng.matrix.interfaces.post.dto.PostInfoDTO;
@@ -35,7 +35,7 @@ public class PostInfoAssembler {
     public PostInfo dtoToPostInfo(PostPublishCommand command) {
         return new PostInfo(
                 new PostInfoId(null),
-                null,
+                command.getPid(),
                 command.getUid(),
                 command.getTitle(),
                 command.getSummary(),

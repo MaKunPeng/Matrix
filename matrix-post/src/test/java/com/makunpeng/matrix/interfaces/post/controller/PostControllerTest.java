@@ -34,20 +34,20 @@ class PostControllerTest {
     private static final Logger logger = LoggerFactory.getLogger(PostControllerTest.class);
 
     @Test
-    void publish() {
-        PostPublishCommand postPublishCommand = new PostPublishCommand();
-        postPublishCommand.setUid(2L);
-        postPublishCommand.setTitle("Test");
-        postPublishCommand.setSummary("Test publish");
-        postPublishCommand.setContent("# Test");
-        postController.publish(postPublishCommand);
+    void publish() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.post("/post")
+                .content("{\"uid\":1,\"title\":\"Initial Title\",\"summary\":\"Initial Summary\",\"content\":\"Initial Content\"}")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andDo(MockMvcResultHandlers.print())
+                .andReturn();
         logger.info("文章发布成功");
     }
 
     @Test
     void update() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.put("/post/update")
-                .content("{\"pid\":11,\"title\":10,\"summary\":1}")
+        mockMvc.perform(MockMvcRequestBuilders.put("/post/20106362")
+                .content("{\"pid\":20106362,\"title\":\"Updated Title\",\"summary\":\"Updated Summary\",\"content\":\"Updated Content\"}")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andDo(MockMvcResultHandlers.print())
@@ -56,8 +56,17 @@ class PostControllerTest {
     }
 
     @Test
+    void delete() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.delete("/post/20106362"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andDo(MockMvcResultHandlers.print())
+                .andReturn();
+        logger.info("文章删除成功");
+    }
+
+    @Test
     void getPostDetails() throws Exception {
-        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/post/details/72601489"))
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/post/details/20106362"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andDo(MockMvcResultHandlers.print())
                 .andReturn();
@@ -67,7 +76,7 @@ class PostControllerTest {
     @Test
     void listPostInfo() throws Exception {
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/post/list")
-                .content("{\"uid\":1,\"pageSize\":10,\"pageNumber\":1}")
+                .content("{\"uid\":2,\"pageSize\":10,\"pageNumber\":1}")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andDo(MockMvcResultHandlers.print())

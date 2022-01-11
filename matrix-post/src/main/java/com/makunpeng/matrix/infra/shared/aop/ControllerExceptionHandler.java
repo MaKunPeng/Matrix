@@ -7,6 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -30,11 +31,16 @@ import java.util.Objects;
 public class ControllerExceptionHandler {
     private static final Logger logger = LoggerFactory.getLogger(ControllerExceptionHandler.class);
 
+    /**
+     * 处理指定类型异常，后续需细分异常类型
+     * @param e 异常对象
+     * @return 响应结果
+     */
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
-    public ResponseResult<?> exceptionHandler(Exception e) {
+    public ResponseEntity<ResponseResult<?>> exceptionHandler(Exception e) {
         logError(e);
-        return ResponseResult.of(ApiResultStatus.FAILED);
+        return ResponseEntity.status(ApiResultStatus.FAILED.httpStatus()).body(ResponseResult.of(ApiResultStatus.FAILED));
     }
 
     /**

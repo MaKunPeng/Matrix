@@ -8,4 +8,6 @@ public interface PostService {
     Post publish(PostPublishCommand command);
 
     void update(PostUpdateCommand command);
+
+    void delete(Long pid);
 }

@@ -32,6 +32,7 @@ public class PostInfoDO {
     private String title;
     private String summary;
     @CreationTimestamp
+    @Column(updatable = false)
     private Timestamp ctime;
     @UpdateTimestamp
     private Timestamp mtime;

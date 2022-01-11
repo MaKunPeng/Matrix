@@ -1,4 +1,4 @@
-package com.makunpeng.matrix.domain.post.aggregate;
+package com.makunpeng.matrix.domain.post.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

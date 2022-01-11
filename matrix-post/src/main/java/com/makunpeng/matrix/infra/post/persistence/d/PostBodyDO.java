@@ -29,6 +29,7 @@ public class PostBodyDO {
     private Long pid;
     private String content;
     @CreationTimestamp
+    @Column(updatable = false)
     private Timestamp ctime;
     @UpdateTimestamp
     private Timestamp mtime;

@@ -11,6 +11,7 @@ import com.makunpeng.matrix.application.post.PostQService;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,7 @@ import java.util.List;
  *
  */
 @Service
+@CacheConfig(cacheNames = "post")
 public class PostQServiceImpl implements PostQService {
     private final JPAQueryFactory jpaQueryFactory;
     private final PostInfoDAO postInfoDAO;
@@ -59,8 +61,8 @@ public class PostQServiceImpl implements PostQService {
      * @param pid 文章id
      * @return 文章详情
      */
-    @Cacheable(value = "post", key = "'details:'.concat(#pid)")
     @Override
+    @Cacheable(key = "'detail:' + #pid")
     public PostDetailsDTO getPostDetails(Long pid) {
         QPostInfoDO postInfoDO = QPostInfoDO.postInfoDO;
         QPostBodyDO postBodyDO = QPostBodyDO.postBodyDO;
