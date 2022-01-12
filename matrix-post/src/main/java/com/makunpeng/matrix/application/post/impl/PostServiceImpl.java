@@ -19,7 +19,6 @@ import org.springframework.stereotype.Service;
  * @since 1.0
  */
 @Service
-@CacheConfig(cacheNames = "post")
 public class PostServiceImpl implements PostService {
     private final PostRepository postRepository;
     private final PostAssembler postAssembler;
@@ -36,7 +35,6 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    @CacheEvict(key = "'details:' + #command.pid")
     public void update(PostUpdateCommand command) {
         Post post = postRepository.findPost(command.getPid());
         PostBody postBody = post.getPostBody();

@@ -24,7 +24,6 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
  */
 @SpringBootTest
 @AutoConfigureMockMvc
-@Rollback
 class PostControllerTest {
     @Autowired
     private PostController postController;
@@ -46,8 +45,8 @@ class PostControllerTest {
 
     @Test
     void update() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.put("/post/20106362")
-                .content("{\"pid\":20106362,\"title\":\"Updated Title\",\"summary\":\"Updated Summary\",\"content\":\"Updated Content\"}")
+        mockMvc.perform(MockMvcRequestBuilders.put("/post/17364200")
+                .content("{\"pid\":17364200,\"title\":\"Updated Title\",\"summary\":\"Updated Summary\",\"content\":\"Updated Content\"}")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andDo(MockMvcResultHandlers.print())
@@ -57,7 +56,7 @@ class PostControllerTest {
 
     @Test
     void delete() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.delete("/post/20106362"))
+        mockMvc.perform(MockMvcRequestBuilders.delete("/post/58524826"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andDo(MockMvcResultHandlers.print())
                 .andReturn();
@@ -66,7 +65,7 @@ class PostControllerTest {
 
     @Test
     void getPostDetails() throws Exception {
-        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/post/details/20106362"))
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/post/details/58524826"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andDo(MockMvcResultHandlers.print())
                 .andReturn();

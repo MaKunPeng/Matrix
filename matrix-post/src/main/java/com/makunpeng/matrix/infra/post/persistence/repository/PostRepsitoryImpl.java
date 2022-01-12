@@ -11,7 +11,12 @@ import com.makunpeng.matrix.infra.post.persistence.d.PostBodyDO;
 import com.makunpeng.matrix.infra.post.persistence.d.PostInfoDO;
 import com.makunpeng.matrix.infra.post.persistence.repository.dao.PostBodyDAO;
 import com.makunpeng.matrix.infra.post.persistence.repository.dao.PostInfoDAO;
+import com.makunpeng.matrix.infra.post.persistence.repository.event.PostCacheEvictEvent;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.context.ApplicationEventPublisherAware;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,13 +30,16 @@ import java.util.Objects;
  * since
  **/
 @Repository
-public class PostRepsitoryImpl implements PostRepository {
+public class PostRepsitoryImpl implements PostRepository, ApplicationEventPublisherAware {
     private PostInfoDAO postInfoDAO;
     private PostBodyDAO postBodyDAO;
     private PostAssembler postAssembler;
     private PostInfoAssembler postInfoAssembler;
     private PostBodyAssembler postBodyAssembler;
     private RedisTemplate<String, Object> redisTemplate;
+    private ApplicationEventPublisher applicationEventPublisher;
+
+    private static final String CACHE_PREFIX = "post";
 
     @Autowired
     public PostRepsitoryImpl(PostInfoDAO postInfoDAO, PostBodyDAO postBodyDAO, PostAssembler postAssembler, PostInfoAssembler postInfoAssembler, PostBodyAssembler postBodyAssembler, RedisTemplate redisTemplate) {
@@ -52,6 +60,7 @@ public class PostRepsitoryImpl implements PostRepository {
 
     @Override
     @Transactional
+    @CacheEvict(value = "post", key = "'details:' + #post.pid")
     public Post savePost(Post post) {
         PostInfo postInfo = post.getPostInfo();
         PostBody postBody = post.getPostBody();
@@ -68,6 +77,11 @@ public class PostRepsitoryImpl implements PostRepository {
         Objects.requireNonNull(pid);
         postInfoDAO.deleteByPid(pid);
         postBodyDAO.deleteByPid(pid);
-        redisTemplate.delete("post:details:" + pid);
+        applicationEventPublisher.publishEvent(new PostCacheEvictEvent(this, pid));
+    }
+
+    @Override
+    public void setApplicationEventPublisher(ApplicationEventPublisher applicationEventPublisher) {
+        this.applicationEventPublisher = applicationEventPublisher;
     }
 }
