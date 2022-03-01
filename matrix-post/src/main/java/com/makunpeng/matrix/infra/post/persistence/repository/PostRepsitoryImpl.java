@@ -29,6 +29,7 @@ import java.util.Objects;
  * @version 1.0
  * since
  **/
+@CacheConfig(cacheNames = "post")
 @Repository
 public class PostRepsitoryImpl implements PostRepository, ApplicationEventPublisherAware {
     private PostInfoDAO postInfoDAO;
@@ -38,8 +39,6 @@ public class PostRepsitoryImpl implements PostRepository, ApplicationEventPublis
     private PostBodyAssembler postBodyAssembler;
     private RedisTemplate<String, Object> redisTemplate;
     private ApplicationEventPublisher applicationEventPublisher;
-
-    private static final String CACHE_PREFIX = "post";
 
     @Autowired
     public PostRepsitoryImpl(PostInfoDAO postInfoDAO, PostBodyDAO postBodyDAO, PostAssembler postAssembler, PostInfoAssembler postInfoAssembler, PostBodyAssembler postBodyAssembler, RedisTemplate redisTemplate) {
@@ -60,7 +59,7 @@ public class PostRepsitoryImpl implements PostRepository, ApplicationEventPublis
 
     @Override
     @Transactional
-    @CacheEvict(value = "post", key = "'details:' + #post.pid")
+    @CacheEvict(key = "'details:' + #post.pid")
     public Post savePost(Post post) {
         PostInfo postInfo = post.getPostInfo();
         PostBody postBody = post.getPostBody();

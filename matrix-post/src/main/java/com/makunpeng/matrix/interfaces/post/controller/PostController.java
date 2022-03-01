@@ -6,10 +6,11 @@ import com.makunpeng.matrix.domain.post.aggregate.Post;
 import com.makunpeng.matrix.infra.post.persistence.assembler.PostInfoAssembler;
 import com.makunpeng.matrix.interfaces.post.api.ApiResultStatus;
 import com.makunpeng.matrix.interfaces.post.api.ResponseResult;
+import com.makunpeng.matrix.interfaces.post.api.dto.CommonPageResultDTO;
 import com.makunpeng.matrix.interfaces.post.command.PostPublishCommand;
 import com.makunpeng.matrix.interfaces.post.command.PostUpdateCommand;
-import com.makunpeng.matrix.interfaces.post.dto.PostDetailsDTO;
-import com.makunpeng.matrix.interfaces.post.dto.PostInfoDTO;
+import com.makunpeng.matrix.interfaces.post.api.dto.PostDetailsDTO;
+import com.makunpeng.matrix.interfaces.post.api.dto.PostInfoDTO;
 import com.makunpeng.matrix.interfaces.post.query.PostInfoListQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -78,8 +79,8 @@ public class PostController {
      * @return 文章分页列表
      */
     @GetMapping(value = "/list")
-    public ResponseResult<List<PostInfoDTO>> listPostInfo(@RequestBody PostInfoListQuery postInfoListQuery) {
-        List<PostInfoDTO> postInfoDTOS = postQService.listPostInfo(postInfoListQuery);
+    public ResponseResult<CommonPageResultDTO<PostInfoDTO>> listPostInfo(@RequestBody PostInfoListQuery postInfoListQuery) {
+        CommonPageResultDTO<PostInfoDTO> postInfoDTOS = postQService.listPostInfo(postInfoListQuery);
         return ResponseResult.of(ApiResultStatus.SUCCESS, postInfoDTOS);
     }
 }

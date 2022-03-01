@@ -2,8 +2,10 @@ package com.makunpeng.matrix.interfaces.post.controller;
 
 import com.makunpeng.matrix.infra.post.persistence.d.PostBodyDO;
 import com.makunpeng.matrix.infra.shared.util.JsonUtils;
-import com.makunpeng.matrix.interfaces.post.dto.PostInfoDTO;
+import com.makunpeng.matrix.interfaces.post.api.dto.PostInfoDTO;
 import org.junit.jupiter.api.Test;
+
+import java.util.Random;
 
 public class UtilsTest {
     @Test
@@ -24,5 +26,8 @@ public class UtilsTest {
         objs[4] = postBodyDO;
         String json = JsonUtils.toJsonWithFormat(objs);
         System.out.println(json);
+        Random random = new Random();
+        int i = random.nextInt();
+
     }
 }

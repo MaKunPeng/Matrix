@@ -25,6 +25,7 @@ dependencies {
 //    implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel'
     // db
     implementation libraries.pgConnect
+    implementation libraries.hibernateTypes
     // redis lettuce 需要引入此依赖
     implementation libraries.commonsPool2
     implementation libraries.commonsIO
