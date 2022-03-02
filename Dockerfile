@@ -2,7 +2,7 @@ FROM openjdk:11-slim AS build
 
 WORKDIR /app
 
-COPY ./gradle ./settings.gradle ./gradlew ./build.gradle ./gradle.propeties ./matrix-common ./matrix-post ./matrix-uaa /app/src/
+COPY ./gradle ./settings.gradle ./gradlew ./build.gradle ./gradle.properties ./matrix-common ./matrix-post ./matrix-uaa /app/src/
 
 RUN mkdir -p ~/.gradle \
     && echo "org.gradle.daemon=false" >> ~/.gradle/gradle.properties \
