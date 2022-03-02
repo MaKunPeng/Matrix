@@ -16,4 +16,5 @@ jitwatch.out
 *.iws
 target
 simulator/src/main/resources/application.conf
-
+dataSources
+.ideaDataSources
