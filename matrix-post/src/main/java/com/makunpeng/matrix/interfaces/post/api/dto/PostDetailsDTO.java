@@ -1,4 +1,4 @@
-package com.makunpeng.matrix.interfaces.post.dto;
+package com.makunpeng.matrix.interfaces.post.api.dto;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;

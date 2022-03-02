@@ -1,26 +1,26 @@
 package com.makunpeng.matrix.infra.post.persistence.d;
 
+import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
+import com.vladmihalcea.hibernate.type.json.JsonType;
 import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.sql.Timestamp;
+import java.util.List;
 
 /**
  * @author MaKunPeng
  * @version 1.0
- * @date 2021/11/7
- * since
  **/
 @Entity
 @Table(name = "post_info")
-@Setter
-@Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+@Data
+@TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 public class PostInfoDO {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "snowflake")
@@ -31,6 +31,10 @@ public class PostInfoDO {
     private Long uid;
     private String title;
     private String summary;
+    private Integer state;
+    @Type(type = "jsonb")
+    @Column(columnDefinition = "jsonb")
+    private List<String> tags;
     @CreationTimestamp
     @Column(updatable = false)
     private Timestamp ctime;

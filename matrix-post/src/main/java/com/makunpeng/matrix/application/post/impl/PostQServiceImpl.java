@@ -4,11 +4,13 @@ import com.makunpeng.matrix.infra.post.persistence.d.PostInfoDO;
 import com.makunpeng.matrix.infra.post.persistence.d.QPostBodyDO;
 import com.makunpeng.matrix.infra.post.persistence.d.QPostInfoDO;
 import com.makunpeng.matrix.infra.post.persistence.repository.dao.PostInfoDAO;
-import com.makunpeng.matrix.interfaces.post.dto.PostDetailsDTO;
-import com.makunpeng.matrix.interfaces.post.dto.PostInfoDTO;
+import com.makunpeng.matrix.interfaces.post.api.dto.CommonPageResultDTO;
+import com.makunpeng.matrix.interfaces.post.api.dto.PostDetailsDTO;
+import com.makunpeng.matrix.interfaces.post.api.dto.PostInfoDTO;
 import com.makunpeng.matrix.interfaces.post.query.PostInfoListQuery;
 import com.makunpeng.matrix.application.post.PostQService;
 import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.dsl.Wildcard;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
@@ -41,19 +43,33 @@ public class PostQServiceImpl implements PostQService {
      * @return 某一页的文章信息列表
      */
     @Override
-    public List<PostInfoDTO> listPostInfo(PostInfoListQuery query) {
+    public CommonPageResultDTO<PostInfoDTO> listPostInfo(PostInfoListQuery query) {
+        CommonPageResultDTO<PostInfoDTO> result = new CommonPageResultDTO<>();
+
         QPostInfoDO postInfoDO = QPostInfoDO.postInfoDO;
+        Long count = jpaQueryFactory.select(Wildcard.count)
+                .from(postInfoDO)
+                .fetchOne();
+
+        // 当前页项目
+        Integer pageSize = query.getPageSize();
         List<PostInfoDTO> postInfoDOS = jpaQueryFactory
                 .select(Projections.fields(PostInfoDTO.class, postInfoDO.id, postInfoDO.pid, postInfoDO.uid, postInfoDO.title,
                         postInfoDO.summary, postInfoDO.ctime, postInfoDO.mtime))
                 .from(postInfoDO)
                 .where(postInfoDO.uid.eq(query.getUid()))
                 .orderBy(postInfoDO.ctime.desc())
-                .offset((long) (query.getPageNumber() - 1) * query.getPageSize())
-                .limit(query.getPageSize())
+                .offset((long) (query.getPageNumber() - 1) * pageSize)
+                .limit(pageSize)
                 .fetch();
 
-        return postInfoDOS;
+        result.setTotalItems(count);
+        result.setTotalPages((int) ((count + pageSize - 1) / pageSize));
+        result.setPageSize(pageSize);
+        result.setCurrentPage(query.getPageNumber());
+        result.setPageItems(postInfoDOS);
+
+        return result;
     }
 
     /**
@@ -71,7 +87,7 @@ public class PostQServiceImpl implements PostQService {
                 PostDetailsDTO.class,
                 postInfoDO.pid,
                 Projections.fields(PostInfoDTO.class, postInfoDO.id, postInfoDO.pid, postInfoDO.uid, postInfoDO.title,
-                        postInfoDO.summary, postInfoDO.ctime, postInfoDO.mtime).as("postInfoDTO"),
+                        postInfoDO.summary, postInfoDO.tags, postInfoDO.ctime, postInfoDO.mtime).as("postInfoDTO"),
                 postBodyDO.content))
                 .from(postInfoDO)
                 .leftJoin(postBodyDO).on(postInfoDO.pid.eq(postBodyDO.pid))

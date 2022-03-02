@@ -4,7 +4,7 @@ import com.makunpeng.matrix.domain.post.entity.PostInfo;
 import com.makunpeng.matrix.domain.post.entity.PostInfoId;
 import com.makunpeng.matrix.infra.post.persistence.d.PostInfoDO;
 import com.makunpeng.matrix.interfaces.post.command.PostPublishCommand;
-import com.makunpeng.matrix.interfaces.post.dto.PostInfoDTO;
+import com.makunpeng.matrix.interfaces.post.api.dto.PostInfoDTO;
 import org.springframework.stereotype.Component;
 
 /**

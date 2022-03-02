@@ -1,4 +1,4 @@
-package com.makunpeng.matrix.interfaces.post.dto;
+package com.makunpeng.matrix.interfaces.post.api.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.SqlResultSetMapping;
 import java.util.Date;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -17,6 +18,7 @@ public class PostInfoDTO {
     private Long uid;
     private String title;
     private String summary;
+    private List<String> tags;
     private Timestamp ctime;
     private Timestamp mtime;
 }

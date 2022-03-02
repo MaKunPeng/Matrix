@@ -1,7 +1,8 @@
 package com.makunpeng.matrix.application.post;
 
-import com.makunpeng.matrix.interfaces.post.dto.PostDetailsDTO;
-import com.makunpeng.matrix.interfaces.post.dto.PostInfoDTO;
+import com.makunpeng.matrix.interfaces.post.api.dto.CommonPageResultDTO;
+import com.makunpeng.matrix.interfaces.post.api.dto.PostDetailsDTO;
+import com.makunpeng.matrix.interfaces.post.api.dto.PostInfoDTO;
 import com.makunpeng.matrix.interfaces.post.query.PostInfoListQuery;
 
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
  * @since 1.0
  */
 public interface PostQService {
-    List<PostInfoDTO> listPostInfo(PostInfoListQuery query);
+    CommonPageResultDTO<PostInfoDTO> listPostInfo(PostInfoListQuery query);
 
     PostDetailsDTO getPostDetails(Long pid);
 }

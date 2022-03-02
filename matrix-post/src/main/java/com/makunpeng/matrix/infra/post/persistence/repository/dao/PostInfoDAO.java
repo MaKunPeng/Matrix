@@ -1,7 +1,7 @@
 package com.makunpeng.matrix.infra.post.persistence.repository.dao;
 
 import com.makunpeng.matrix.infra.post.persistence.d.PostInfoDO;
-import com.makunpeng.matrix.interfaces.post.dto.PostInfoDTO;
+import com.makunpeng.matrix.interfaces.post.api.dto.PostInfoDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
