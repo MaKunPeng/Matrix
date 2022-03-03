@@ -12,7 +12,7 @@ RUN mkdir -p ~/.gradle \
     && ./gradlew --version;
 
 RUN cd /app/src \
-    && ./gradlew clean bootJar --parallel --no-daemon;
+    && ./gradlew clean bootJar --parallel --no-daemon -x test;
 
 FROM openjdk:11 AS publish
 
@@ -21,8 +21,8 @@ WORKDIR /app/pub
 COPY --from=build /app/src/matrix-post/build/libs/matrix-post-1.0-SNAPSHOT.jar /app/pub
 COPY --from=build /app/src/matrix-common/build/libs/matrix-common-1.0-SNAPSHOT.jar  /app/src/matrix-uaa/build/libs/matrix-uaa-1.0-SNAPSHOT.jar  /app/pub/lib/
 
-EXPOSE 8080 8088
+EXPOSE 8080 8081
 ENV PATH $PATH:$JAVA_HOME/bin:.
 
-ENTRYPOINT ["java", "-server", "-Xmx2048M", "-cp", "matrix-post-1.0-SNAPSHOT.jar:lib/*", "com.makunpeng.matrix.MatrixAppApplication"]
+ENTRYPOINT ["java", "-server", "-Xmx2048M", "-cp", "matrix-post-1.0-SNAPSHOT.jar:lib/*", "org.springframework.boot.loader.JarLauncher"]
 
